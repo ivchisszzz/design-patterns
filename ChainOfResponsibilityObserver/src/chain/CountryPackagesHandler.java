@@ -8,18 +8,23 @@ public class CountryPackagesHandler extends Handler {
     this.setSuccessor(successor);
   }
 
+
+
   @Override
   public void parse(PackageTypeEnum packageType) {
-    System.out.printf("Trying to process %s with %s ... %n", packageType,
-        this.getClass().getName());
 
     if (canHandlePackage(packageType)) {
       System.out.println("  # A inside country handler is handling the package: " + packageType);
+      getStateHandler().setPackageState(this);
+      return;
     } else {
       super.parse(packageType);
     }
   }
 
+  protected boolean canHandlePackage(PackageTypeEnum packageType) {
+    return packageType != null && packageType == PackageTypeEnum.COUNTRY;
 
+  }
 
 }

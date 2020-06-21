@@ -1,10 +1,14 @@
 package packageType;
 
-public class AcceptedPackage implements PackageState {
+import chain.Handler;
+
+public class AcceptedPackage extends PackageStateHandler {
+
 
   @Override
-  public void alert(PackageStateContext ctx) {
+  public void setPackageState(Handler handler) {
     System.out.println(" * the package is accepted...");
+    handler.setStateHandler(new PreparationState());
 
   }
 

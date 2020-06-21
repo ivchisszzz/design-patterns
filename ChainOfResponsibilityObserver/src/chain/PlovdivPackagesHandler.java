@@ -6,18 +6,24 @@ public class PlovdivPackagesHandler extends Handler {
 
 
   public PlovdivPackagesHandler(Handler successor) {
-    this.setSuccessor(successor);
+    super(successor);
   }
+
 
   @Override
   public void parse(PackageTypeEnum packageType) {
-    System.out.printf("Trying to process %s with %s ... %n", packageType,
-        this.getClass().getName());
 
     if (canHandlePackage(packageType)) {
       System.out.println("  # A plovdiv package handler is handling the package: " + packageType);
+      getStateHandler().setPackageState(this);
+      return;
     } else {
       super.parse(packageType);
     }
+  }
+
+  protected boolean canHandlePackage(PackageTypeEnum packageType) {
+    return packageType != null && packageType == PackageTypeEnum.PLOVDIV;
+
   }
 }

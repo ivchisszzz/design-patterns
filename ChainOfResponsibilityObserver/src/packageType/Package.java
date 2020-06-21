@@ -2,6 +2,11 @@ package packageType;
 
 public class Package {
 
+  public Package(PackageTypeEnum packageType) {
+
+    this.packageType = packageType;
+  }
+
   PackageTypeEnum packageType;
 
   public PackageTypeEnum getPackageType() {
